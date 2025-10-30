@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selamat Hari Lahir, Fauzan!</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-blue: #00aaff; /* Biru Neon */
+            --dark-bg-1: #1a1a2e;
+            --dark-bg-2: #16213e;
+            --text-light: #e0e0e0;
+            --text-dark: #a0a0a0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, var(--dark-bg-1), var(--dark-bg-2));
+            color: var(--text-light);
+            margin: 0; padding: 0;
+            height: 100vh; width: 100vw;
+            overflow: hidden; 
+        }
+
+        /* ================================================= */
+        /* === ⬇️ HIASAN 1: ZARAH TERAPUNG (CSS) ⬇️ === */
+        /* ================================================= */
+        .sparks-container {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: 1; /* Di belakang halaman (10), di depan latar (-1) */
+            pointer-events: none; /* Tak boleh ditekan */
+            overflow: hidden;
+        }
+        .spark {
+            position: absolute;
+            bottom: -20px; /* Mula di bawah skrin */
+            width: 3px; height: 3px;
+            background: var(--primary-blue);
+            border-radius: 50%;
+            opacity: 0;
+            box-shadow: 0 0 5px var(--primary-blue), 0 0 10px var(--primary-blue);
+            animation: rise 20s infinite linear;
+        }
+        @keyframes rise {
+            0% { transform: translateY(0); opacity: 0; }
+            10% { opacity: 0.7; }
+            90% { opacity: 0.7; }
+            100% { transform: translateY(-110vh); opacity: 0; }
+        }
+        /* Tetapkan 'delay' & 'duration' berbeza */
+        .spark:nth-child(1) { left: 10%; animation-duration: 15s; animation-delay: 1s; }
+        .spark:nth-child(2) { left: 20%; animation-duration: 12s; animation-delay: 3s; }
+        .spark:nth-child(3) { left: 30%; animation-duration: 18s; animation-delay: 5s; }
+        .spark:nth-child(4) { left: 40%; animation-duration: 10s; animation-delay: 0s; }
+        .spark:nth-child(5) { left: 50%; animation-duration: 14s; animation-delay: 7s; }
+        .spark:nth-child(6) { left: 60%; animation-duration: 16s; animation-delay: 2s; }
+        .spark:nth-child(7) { left: 70%; animation-duration: 11s; animation-delay: 4s; }
+        .spark:nth-child(8) { left: 80%; animation-duration: 19s; animation-delay: 6s; }
+        .spark:nth-child(9) { left: 90%; animation-duration: 13s; animation-delay: 8s; }
+        .spark:nth-child(10) { left: 95%; animation-duration: 17s; animation-delay: 9s; }
+        /* === TAMAT HIASAN 1 === */
+
+
+        .parallax-bg {
+            position: fixed;
+            top: -5%; left: -5%;
+            width: 110%; height: 110%;
+            z-index: -1;
+            background-image: url('https://www.transparenttextures.com/patterns/dark-denim.png');
+            opacity: 0.05;
+            transition: transform 0.1s ease-out;
+        }
+
+        .app-container {
+            position: relative;
+            height: 100%; width: 100%;
+        }
+
+        /* === INI ADALAH ANIMASI 'SLIDE' ASAL YANG AWAK MAHU === */
+        .page {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            box-sizing: border-box;
+            transition: transform 1.2s cubic-bezier(0.86, 0, 0.07, 1);
+            transform: translateX(100%);
+        }
+        .page.active { transform: translateX(0); z-index: 10; }
+        .page.exit-left { transform: translateX(-100%); z-index: 9; }
+
+        .glass-panel {
+            background: rgba(22, 33, 62, 0.3);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            max-width: 600px;
+            width: 90%;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            text-align: center;
+        }
+
+        h1, h2 {
+            font-weight: 700; color: #fff;
+            text-shadow: 
+                0 0 5px rgba(0, 170, 255, 0.5),
+                0 0 10px rgba(0, 170, 255, 0.5),
+                0 0 20px var(--primary-blue);
+        }
+        h1 { font-size: 2.5em; }
+        h2 { font-size: 2em; }
+        
+        /* === Teks 'Hologram' === */
+        p {
+            color: var(--text-light); /* Lebih cerah daripada --text-dark */
+            font-size: 1.1em;
+            opacity: 0.8; /* Rendahkan opacity sedikit */
+            animation: text-flicker 5s infinite alternate; /* Tambah animasi */
+        }
+
+        button {
+            background: var(--primary-blue);
+            color: white; border: none;
+            padding: 12px 28px;
+            font-size: 16px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: bold; cursor: pointer;
+            border-radius: 25px; margin: 20px;
+            transition: all 0.3s ease;
+            min-height: 44px;
+            box-shadow: 0 0 10px var(--primary-blue), 0 0 20px rgba(0, 170, 255, 0.5);
+        }
+        button:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 0 15px var(--primary-blue), 0 0 30px rgba(0, 170, 255, 0.7);
+        }
+
+        /* ================================================= */
+        /* === ⬇️ 'GLOW' BERDENYUT (CSS) ⬇️ === */
+        /* ================================================= */
+        @keyframes pulse-glow-button {
+            0%, 100% { 
+                box-shadow: 0 0 10px var(--primary-blue), 0 0 20px rgba(0, 170, 255, 0.5); 
+            }
+            50% { 
+                box-shadow: 0 0 15px var(--primary-blue), 0 0 30px rgba(0, 170, 255, 0.8), 0 0 40px var(--primary-blue);
+            }
+        }
+        @keyframes pulse-glow-text {
+             0%, 100% { 
+                text-shadow: 0 0 5px rgba(0, 170, 255, 0.5), 0 0 10px rgba(0, 170, 255, 0.5), 0 0 20px var(--primary-blue);
+            }
+            50% { 
+                text-shadow: 0 0 10px rgba(0, 170, 255, 0.7), 0 0 20px rgba(0, 170, 255, 0.7), 0 0 30px var(--primary-blue);
+            }
+        }
+        @keyframes text-flicker {
+            0%, 100% { opacity: 0.8; text-shadow: 0 0 2px rgba(0,170,255,0.4); }
+            50% { opacity: 0.9; text-shadow: 0 0 4px rgba(0,170,255,0.6); }
+        }
+
+        .glass-panel button {
+            animation: pulse-glow-button 3s infinite ease-in-out;
+        }
+        .glass-panel h1, .glass-panel h2 {
+             animation: pulse-glow-text 3s infinite ease-in-out;
+        }
+        
+        .envelope {
+            position: relative;
+            width: 300px; height: 200px;
+            margin: 20px auto;
+            background: #333;
+            border: 2px solid #555;
+            perspective: 1000px;
+            cursor: pointer; 
+        }
+        .envelope-flap {
+            position: absolute; top: 0; left: 0;
+            width: 100%; 
+            height: 100%;
+            background: var(--primary-blue);
+            transform-origin: top;
+            transition: transform 1s ease;
+            clip-path: polygon(0 0, 100% 0, 50% 50%); 
+            z-index: 20; 
+        }
+        .envelope.open .envelope-flap { transform: rotateX(180deg); }
+        
+        .letter {
+            display: none;
+        }
+        
+        .memory-gallery {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px; margin-top: 20px;
+            max-width: 100%;
+        }
+        .memory-gallery img {
+            width: 100%; height: 120px;
+            object-fit: cover;
+            border-radius: 10px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer; 
+        }
+        
+        .memory-gallery img:hover {
+            transform: scale(1.05) translateY(-5px); /* Angkat & zoom */
+            border-color: var(--primary-blue);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4), 0 0 15px var(--primary-blue);
+        }
+
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .modal-content-base {
+            background: rgba(22, 33, 62, 0.8);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            max-width: 600px;
+            width: 90%;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            text-align: center;
+            position: relative;
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+        }
+        .modal-overlay.active .modal-content-base {
+            transform: scale(1);
+        }
+        .modal-close {
+            position: absolute;
+            top: 10px; right: 20px;
+            font-size: 36px;
+            color: #fff;
+            cursor: pointer;
+            transition: transform 0.2s;
+            z-index: 10;
+        }
+        .modal-close:hover {
+            transform: scale(1.2) rotate(90deg);
+            color: var(--primary-blue);
+        }
+        
+        .modal-content-gallery img {
+            max-width: 100%;
+            max-height: 300px; 
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+        .modal-content-gallery p {
+            color: var(--text-light); 
+            font-size: 1.1em;
+            animation: none; /* Padam 'flicker' dalam modal */
+        }
+
+        .modal-content-letter {
+            background: #f8f8f8;
+            color: #333;
+            height: 70vh; 
+            padding: 30px;
+            text-align: left;
+            overflow-y: auto;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .modal-content-letter::-webkit-scrollbar {
+            display: none;
+        }
+        .modal-content-letter h2 {
+            text-shadow: none;
+            color: #111;
+            text-align: center;
+            animation: none; /* Padam 'glow' dalam surat */
+        }
+        .modal-content-letter p {
+            color: #444;
+            font-size: 1em;
+            line-height: 1.6;
+            animation: none; /* Padam 'flicker' dalam surat */
+        }
+        .modal-content-letter .your-photo {
+            width: 120px; height: 120px;
+            border-radius: 50%; margin: 10px auto;
+            display: block;
+            border: 3px solid var(--primary-blue);
+        }
+        #letterModal .modal-close {
+            color: #555;
+        }
+        #letterModal .modal-close:hover {
+            color: var(--primary-blue);
+        }
+
+        .music-player {
+            position: fixed;
+            z-index: 1000;
+            bottom: 15px; right: 15px; left: auto;
+            width: 250px; padding: 15px;
+            display: flex;
+            flex-direction: column; 
+            align-items: center;    
+            background: rgba(22, 33, 62, 0.5); 
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-radius: 12px; 
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+        .music-player .song-info {
+            order: 1; font-size: 13px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            text-align: center;
+        }
+        .music-player .controls {
+            order: 2; display: flex; align-items: center;
+        }
+        .music-player button {
+            background: none; border: none;
+            color: white; font-size: 20px; 
+            cursor: pointer; margin: 0 10px;
+            min-width: 44px; min-height: 44px;
+            box-shadow: none; padding: 0;
+            display: flex; justify-content: center; align-items: center;
+            transition: all 0.2s ease;
+            animation: none; 
+        }
+        .music-player button:hover {
+            color: var(--primary-blue);
+            transform: scale(1.1); 
+            box-shadow: none;
+        }
+        .music-player .progress {
+            order: 3; margin: 8px 0 0 0; width: 90%;
+        }
+        .music-player .progress input { width: 100%; }
+        .icon { fill: currentColor; width: 1em; height: 1em; }
+
+        .song-list {
+            list-style: none; padding: 0; margin: 20px 0; width: 100%;
+        }
+        .song-list li {
+            cursor: pointer; padding: 12px;
+            background: rgba(0, 0, 0, 0.2); 
+            color: var(--text-light);
+            margin: 5px 0; border-radius: 8px; 
+            min-height: 44px;
+            transition: all 0.3s ease;
+            border-left: 3px solid transparent;
+        }
+        .song-list li:hover {
+            background: var(--primary-blue);
+            color: white;
+            transform: translateX(5px);
+            border-left: 3px solid #fff;
+        }
+
+        /* === Animasi 'Staggered Fade-in' === */
+        .page .glass-panel > * {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease-out;
+        }
+        .page.active .glass-panel > * {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .page.active .glass-panel h1,
+        .page.active .glass-panel h2 { transition-delay: 0.3s; }
+        .page.active .glass-panel p { transition-delay: 0.5s; }
+        .page.active .glass-panel img,
+        .page.active .glass-panel .envelope,
+        .page.active .glass-panel .song-list,
+        .page.active .glass-panel .memory-gallery { transition-delay: 0.7s; }
+        .page.active .glass-panel button { transition-delay: 0.9s; }
+        .page.active .glass-panel .song-list li {
+            transition-delay: 0s;
+        }
+
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2em; }
+            h2 { font-size: 1.5em; }
+            .glass-panel { width: 95%; padding: 20px; }
+            .memory-gallery { grid-template-columns: 1fr 1fr; }
+            .memory-gallery img { height: 100px; }
+            .music-player {
+                width: 180px;
+                padding: 10px;
+                bottom: 10px; right: 10px;
+            }
+            .music-player .song-info { font-size: 12px; }
+            .modal-content-letter p { font-size: 0.9em; }
+
+            /* === PERBAIKAN UNTUK MODAL (POP-UP) PADA TELEFON === */
+            .modal-content-base {
+                width: 95%;     /* Lebarkan modal ke 95% skrin */
+                padding: 20px;  /* Kurangkan padding tepi dari 30px ke 20px */
+            }
+            .modal-content-gallery p {
+                font-size: 1em; /* Kecilkan saiz fon kapsyen */
+            }
+            .modal-content-letter h2 {
+                font-size: 1.3em; /* Kecilkan tajuk "For Fauzan" */
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="sparks-container">
+        <div class="spark"></div> <div class="spark"></div> <div class="spark"></div>
+        <div class="spark"></div> <div class="spark"></div> <div class="spark"></div>
+        <div class="spark"></div> <div class="spark"></div> <div class="spark"></div>
+        <div class="spark"></div>
+    </div>
+    <div class="parallax-bg" id="parallax-bg"></div>
+    
+    <div class="app-container">
+
+        <div id="page1" class="page active">
+            <div class="glass-panel">
+                <h1>Happy Birthday, Fauzan!</h1>
+                <p>Sesuatu yang istimewa untuk kau. Klik untuk mulakan.</p>
+                <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3NqOWZ1dXJvOXZ0ZjV3MjZ1cXN2b2J0bWR0ajRoc3g4MGFoYXQ5cyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/LdOyjZ7io5Msw/giphy.gif" alt="Party GIF" style="width: 150px; border-radius: 10px; margin: 10px;">
+                <br>
+                <button onclick="nextPage(2)">Mulakan Pengembaraan</button>
+            </div>
+        </div>
+
+        <div id="page2" class="page">
+            <div class="glass-panel">
+                <h2>Pilih 'Soundtrack' Hari Ini</h2>
+                <p>Pilih lagu tema untuk hari istimewa kau.</p>
+                <ul class="song-list">
+                    <li onclick="selectSong(0)">Music 1: About you</li>
+                    <li onclick="selectSong(1)">Music 2: somebody to you</li>
+                    <li onclick="selectSong(2)">Lagu 3: Chill Vibes Only</li>
+                </ul>
+                <button onclick="nextPage(3)">Seterusnya: Surat Untuk Kau</button>
+            </div>
+        </div>
+
+        <div id="page3" class="page">
+            <div class="glass-panel">
+                <h2>Satu Mesej Khas... (Tekan Sampul)</h2>
+                <div class="envelope" id="envelope" onclick="openEnvelope(this)">
+                    <div class="envelope-flap"></div>
+                    <div class="letter"></div> 
+                </div>
+                <button onclick="nextPage(4)" style="display:none;" id="nextToMemory">Imbas Kembali</button>
+            </div>
+        </div>
+
+        <div id="page4" class="page">
+            <div class="glass-panel">
+                <h2>Galeri Kenangan: Part 1 (Tekan Gambar)</h2>
+                <p>Ingat lagi tak masa ni?</p>
+                <div class="memory-gallery">
+                    <img src="https://via.placeholder.com/200x200?text=Memori+1" alt="Memory 1" 
+                         data-caption="Ini adalah kapsyen/cerita untuk gambar 1. Masa ni kita..." 
+                         onclick="openModal(this)">
+                    <img src="https://via.placeholder.com/200x200?text=Memori+2" alt="Memory 2"
+                         data-caption="Hahaha yang ini lawak, masa kita..."
+                         onclick="openModal(this)">
+                    <img src="https://via.placeholder.com/200x200?text=Memori+3" alt="Memory 3"
+                         data-caption="Ini gambar fav aku."
+                         onclick="openModal(this)">
+                </div>
+                <button onclick="nextPage(5)">Lagi Kenangan</button>
+            </div>
+        </div>
+
+        <div id="page5" class="page">
+            <div class="glass-panel">
+                <h2>Galeri Kenangan: Part 2 (Tekan Gambar)</h2>
+                <p>Yang ini paling 'legend'...</p>
+                <div class="memory-gallery">
+                    <img src="https://via.placeholder.com/200x200?text=Memori+4" alt="Memory 4"
+                         data-caption="Cerita untuk gambar 4."
+                         onclick="openModal(this)">
+                    <img src="https://via.placeholder.com/200x200?text=Memori+5" alt="Memory 5"
+                         data-caption="Cerita untuk gambar 5."
+                         onclick="openModal(this)">
+                    <img src="https://via.placeholder.com/200x200?text=Memori+6" alt="Memory 6"
+                         data-caption="Cerita untuk gambar 6."
+                         onclick="openModal(this)">
+                </div>
+                <button onclick="nextPage(6)">Mesej Terakhir</button>
+            </div>
+        </div>
+
+        <div id="page6" class="page">
+            <div class="glass-panel">
+                <h2>Kata-Kata Semangat</h2>
+                <p>Jangan pernah berhenti bermimpi dan berjuang! Kamu hebat, dan masa depanmu cerah. Selamat ulang tahun lagi, Kawan!</p>
+                <p>🎉 Cheers! 🎉</p>
+                <button onclick="nextPage(1)">Mula Semula</button>
+            </div>
+        </div>
+    </div>
+    
+    <div id="memoryModal" class="modal-overlay" onclick="closeModal()">
+        <div class="modal-content-base modal-content-gallery" onclick="event.stopPropagation()">
+            <span class="modal-close" onclick="closeModal()">&times;</span>
+            <img id="modalImage" src="" alt="Memory">
+            <p id="modalCaption"></p>
+        </div>
+    </div>
+
+    <div id="letterModal" class="modal-overlay" onclick="closeLetterModal()">
+        <div class="modal-content-base modal-content-letter" onclick="event.stopPropagation()">
+            <span class="modal-close" onclick="closeLetterModal()">&times;</span>
+            
+            <img src="https://via.placeholder.com/150x150?text=GAMBAR+ANDA" alt="Your Photo" class="your-photo">
+            <h2>For Fauzan,</h2>
+            
+            <p>Happy Birthday, Fauzannnnn! Dah setahun lagi berlalu, dan aku nak ambil masa ni untuk ucapkan yang terbaik untuk kau.</p>
+            <p>Semoga tahun ini penuh dengan kejayaan, kesihatan yang baik, dan apa sahaja yang kau hajati. Kau adalah salah seorang kawan terbaik yang aku ada, dan aku hargai semua memori kita bersama.</p>
+            <p>Ingat lagi tak masa kita [masukkan kenangan di sini]? Hahaha, itu memang kelakar. Atau masa kita [masukkan kenangan lain]? Itu semua adalah kenangan yang aku takkan lupakan.</p>
+            <p>Terima kasih sebab sentiasa ada, tak kira susah atau senang. Kau sentiasa tahu cara nak buat aku gelak. Teruskan jadi diri kau yang hebat.</p>
+            <p>Cheers untuk satu lagi pusingan hidup! Jom jadikan tahun ni lebih 'legend' dari tahun lepas!</p>
+            <p>Ikhlas,</p>
+            <p>[NAMA ANDA]</p>
+        </div>
+    </div>
+
+
+    <div class="music-player">
+        <div class="song-info" id="songInfo">No song selected</div>
+        <div class="controls">
+            <button onclick="previousSong()">
+                <svg class="icon" viewBox="0 0 24 24"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"></path></svg>
+            </button>
+            <button onclick="togglePlayPause()" id="playPauseBtn">
+                <svg class="icon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"></path></svg>
+            </button>
+            <button onclick="nextSong()">
+                <svg class="icon" viewBox="0 0 24 24"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6z"></path></svg>
+            </button>
+        </div>
+        <div class="progress">
+            <input type="range" id="progressBar" min="0" max="100" value="0" onchange="seekSong()">
+        </div>
+    </div>
+
+    <script>
+        // KOD JAVASCRIPT INI LENGKAP DENGAN PEMBETULAN 'BUG'
+        let currentPage = 1;
+        let isAnimating = false; 
+
+        function nextPage(pageNum) {
+            if (isAnimating) return; 
+
+            const currentPageEl = document.getElementById('page' + currentPage);
+            const nextPageEl = document.getElementById('page' + pageNum);
+
+            // Kes Khas: Bergerak dari muka 3 (surat) ke muka 4 (galeri)
+            if (currentPage === 3 && pageNum === 4) {
+                isAnimating = true; 
+                const envelope = document.getElementById('envelope');
+                
+                envelope.classList.remove('open');
+                document.getElementById('nextToMemory').style.display = 'none';
+                
+                setTimeout(() => {
+                    currentPageEl.classList.add('exit-left');
+                    currentPageEl.classList.remove('active');
+                    nextPageEl.classList.add('active');
+                    
+                    currentPage = pageNum; 
+                    isAnimating = false; 
+                    
+                    envelope.onclick = function() { openEnvelope(this); };
+                }, 1000); // Masa untuk sampul surat tutup
+            
+            // Kes Khas: "Mula Semula" (ulang tayang)
+            } else if (pageNum === 1 && currentPage !== 1) {
+                isAnimating = true;
+
+                // Reset sampul surat di Page 3
+                const envelope = document.getElementById('envelope');
+                envelope.classList.remove('open');
+                document.getElementById('nextToMemory').style.display = 'none';
+                envelope.onclick = function() { openEnvelope(this); };
+
+                // Reset SEMUA halaman ke keadaan asal
+                 document.querySelectorAll('.page').forEach(p => {
+                    p.classList.remove('active', 'exit-left', 'exit-right');
+                    p.style.transform = null; 
+                });
+                
+                // Aktifkan Halaman 1
+                nextPageEl.classList.add('active'); 
+                currentPage = pageNum;
+                isAnimating = false; 
+            
+            // Logik tukar halaman biasa
+            } else {
+                isAnimating = true;
+
+                if (currentPage === 3) {
+                     const envelope = document.getElementById('envelope');
+                     envelope.classList.remove('open');
+                     document.getElementById('nextToMemory').style.display = 'none';
+                     envelope.onclick = function() { openEnvelope(this); };
+                }
+
+                currentPageEl.classList.add('exit-left');
+                currentPageEl.classList.remove('active');
+                nextPageEl.classList.add('active'); 
+                
+                currentPage = pageNum;
+                // Selaraskan dengan tempoh transisi CSS (1.2s = 1200ms)
+                setTimeout(() => { isAnimating = false; }, 1200); 
+            }
+        }
+
+        // FUNGSI SAMPUL SURAT
+        const letterModal = document.getElementById('letterModal');
+        
+        function openEnvelope(envelopeElement) {
+            if (envelopeElement.classList.contains('open') || isAnimating) return; 
+            
+            isAnimating = true; 
+            envelopeElement.classList.add('open'); 
+            envelopeElement.onclick = null; 
+            
+            setTimeout(() => {
+                letterModal.classList.add('active'); 
+                isAnimating = false; 
+            }, 700); 
+        }
+
+        function closeLetterModal() {
+            letterModal.classList.remove('active');
+            document.getElementById('nextToMemory').style.display = 'inline-block';
+        }
+        
+        
+        // FUNGSI MODAL GALERI
+        const memoryModal = document.getElementById('memoryModal');
+        const modalImage = document.getElementById('modalImage');
+        const modalCaption = document.getElementById('modalCaption');
+        
+        function openModal(imgElement) {
+            const src = imgElement.src;
+            const caption = imgElement.getAttribute('data-caption');
+            modalImage.src = src;
+            modalCaption.textContent = caption.trim() || "Tiada kapsyen."; // Pastikan ada teks
+            memoryModal.classList.add('active');
+        }
+        
+        function closeModal() {
+            memoryModal.classList.remove('active');
+        }
+
+        // JAVASCRIPT PARALLAX
+        const bg = document.getElementById('parallax-bg');
+        document.addEventListener('mousemove', (e) => {
+            const moveX = (e.clientX / window.innerWidth - 0.5) * -40;
+            const moveY = (e.clientY / window.innerHeight - 0.5) * -40;
+            bg.style.transform = `translate(${moveX}px, ${moveY}px)`;
+        });
+
+        // JAVASCRIPT PEMAIN MUZIK
+        const playPauseBtn = document.getElementById('playPauseBtn');
+        const playIcon = '<svg class="icon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"></path></svg>';
+        const pauseIcon = '<svg class="icon" viewBox="0 0 24 24"><path d="M6 14h4V5H6v9zm8-9v9h4V5h-4z"></path></svg>';
+
+        // ⬇️ Pautan lagu yang awak berikan ⬇️
+        const songs = [
+            { title: 'About You by The 1975', src: 'https://tzukiz.github.io/About You by The 1975 Lyric Edit.mp3' },
+            { title: 'Somebody to You (ft. Demi)', src: 'https://tzukiz.github.io/somebody to you - the vamps ft. demi lovato (edit audio) [I5gj-cyoBqM].mp3' },
+            { title: 'Lagu 3: Chill Vibes', src: 'https://www.soundjay.com/misc/sounds/laugh-01.wav' } // Masih placeholder
+        ];
+        let currentSongIndex = -1;
+        const audio = new Audio();
+        const progressBar = document.getElementById('progressBar');
+        const songInfo = document.getElementById('songInfo');
+
+        function selectSong(index) {
+            currentSongIndex = index; loadSong(); playSong();
+        }
+        function loadSong() {
+            audio.src = songs[currentSongIndex].src;
+            songInfo.textContent = songs[currentSongIndex].title;
+        }
+        function playSong() {
+            audio.play().catch(e => console.error("Error playing audio:", e));
+            playPauseBtn.innerHTML = pauseIcon;
+        }
+        function pauseSong() {
+            audio.pause(); playPauseBtn.innerHTML = playIcon;
+        }
+        function togglePlayPause() {
+            if (currentSongIndex === -1) { selectSong(0); return; }
+            if (audio.paused) { playSong(); } else { pauseSong(); }
+        }
+        function nextSong() {
+            if (currentSongIndex === -1) { selectSong(0); return; }
+            currentSongIndex = (currentSongIndex + 1) % songs.length;
+            loadSong(); playSong();
+        }
+        function previousSong() {
+            if (currentSongIndex === -1) { selectSong(0); return; }
+            currentSongIndex = (currentSongIndex - 1 + songs.length) % songs.length;
+            loadSong(); playSong();
+        }
+        function seekSong() {
+            if (audio.duration) {
+                audio.currentTime = (progressBar.value / 100) * audio.duration;
+            }
+        }
+        audio.addEventListener('timeupdate', () => {
+            if (audio.duration) {
+                progressBar.value = (audio.currentTime / audio.duration) * 100;
+            }
+        });
+        audio.addEventListener('ended', nextSong);
+    </script>
+</body>
+</html>
